@@ -15,7 +15,7 @@ setup(
     version='0.0.5',
     author='zbc',
     author_email='zbc@mail.ustc.edu.cn',
-    url='',
+    url='https://github.com/zbc0315/rdu',
     description=u'reaction data utils',
     long_description=long_description,
     long_description_content_type='text/markdown',
