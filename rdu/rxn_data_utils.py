@@ -19,15 +19,24 @@ class RxnDataUtils:
         self._rxn_df = pd.read_csv(rxn_data_fp, sep='\t', encoding='utf-8')
         self._mol_data_utils = mol_data_utils
 
+    def init_mols(self, rxn: Rxn):
+        rxn.reactants = [self._mol_data_utils.get_mol_with_code(mol_code) for mol_code in rxn.reactants_codes]
+        rxn.products = [self._mol_data_utils.get_mol_with_code(rxn.product_code)]
+        rxn.catalysts = [self._mol_data_utils.get_mol_with_code(mol_code) for mol_code in rxn.catalysts_codes]
+        rxn.solvents = [self._mol_data_utils.get_mol_with_code(mol_code) for mol_code in rxn.solvents_codes]
+
     def iter_rxn(self) -> Iterator[Rxn]:
         self._rxn_df = self._rxn_df.sample(frac=1)
         for _, row in self._rxn_df.iterrows():
-            rxn = Rxn.init_from_series(row)
-            rxn.reactants = [self._mol_data_utils.get_mol_with_code(mol_code) for mol_code in rxn.reactants_codes]
-            rxn.products = [self._mol_data_utils.get_mol_with_code(rxn.product_code)]
-            rxn.catalysts = [self._mol_data_utils.get_mol_with_code(mol_code) for mol_code in rxn.catalysts_codes]
-            rxn.solvents = [self._mol_data_utils.get_mol_with_code(mol_code) for mol_code in rxn.solvents_codes]
+            rxn = Rxn(row)
             yield rxn
+
+    def get_rxn_by_code(self, rxn_code: str) -> Rxn:
+        query_df = self._rxn_df.query(f"rxn_code=='{rxn_code}'")
+        if len(query_df) == 0:
+            return None
+        idx = query_df.index[0]
+        return Rxn(query_df.loc[idx])
 
 
 if __name__ == "__main__":

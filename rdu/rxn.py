@@ -12,32 +12,17 @@ from rdu.mol import Mol
 
 class Rxn:
 
-    @classmethod
-    def init_from_series(cls, ser: pd.Series):
-        rxn = Rxn()
-        rxn.id = ser['id']
-        rxn.rxn_code = ser['rxn_code']
-        rxn.rxn_mols_code = ser['rxn_mols_code']
-        rxn.reactants_codes = eval(ser['reactants_codes'])
-        rxn.product_code = ser['product_code']
-        rxn.catalysts_codes = eval(ser['catalysts_codes'])
-        rxn.solvents_codes = eval(ser['solvents_codes'])
-        rxn.yield_product = ser['yield_product']
-        rxn.rxn_smiles = ser['rxn_smiles']
-        rxn.create_year = ser['create_year']
-        return rxn
-
-    def __init__(self):
-        self.id: int = 0
-        self.rxn_code: str = ''
-        self.rxn_mols_code: str = ''
-        self.reactants_codes: [str] = []
-        self.product_code: str = ''
-        self.catalysts_codes: [str] = []
-        self.solvents_codes: [str] = []
-        self.yield_product: float = 0
-        self.rxn_smiles: str = ''
-        self.create_year: int = 0
+    def __init__(self, ser: pd.Series):
+        self.id = ser['id']
+        self.rxn_code = ser['rxn_code']
+        self.rxn_mols_code = ser['rxn_mols_code']
+        self.reactants_codes = eval(ser['reactants_codes'])
+        self.product_code = ser['product_code']
+        self.catalysts_codes = eval(ser['catalysts_codes'])
+        self.solvents_codes = eval(ser['solvents_codes'])
+        self.yield_product = ser['yield_product']
+        self.rxn_smiles = ser['rxn_smiles']
+        self.create_year = ser['create_year']
 
         self.reactants: [Mol] = []
         self.products: [Mol] = []
