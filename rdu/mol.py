@@ -10,22 +10,12 @@ import pandas as pd
 
 class Mol:
 
-    @classmethod
-    def init_from_series(cls, ser: pd.Series):
-        mol = Mol()
-        mol.id = ser['id']
-        mol.mol_code = ser['mol_code']
-        # mol.names = eval(ser['names'])
-        mol.inchi = ser['inchi']
-        mol.smiles = ser['smiles']
-        return mol
-
-    def __init__(self):
-        self.id: int = 0
-        self.mol_code: str = ''
+    def __init__(self, ser: pd.Series):
+        self.id: int = ser['id']
+        self.mol_code: str = ser['mol_code']
         # self.names: [str] = []
-        self.inchi: str = ''
-        self.smiles: str = ''
+        self.inchi: str = ser['inchi']
+        self.smiles: str = ser['smiles']
 
 
 if __name__ == "__main__":

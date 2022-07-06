@@ -20,7 +20,7 @@ class MolDataUtils:
         if len(query_df) == 0:
             return None
         idx = query_df.index[0]
-        return Mol.init_from_series(query_df.loc[idx])
+        return Mol(query_df.loc[idx])
 
 
 if __name__ == "__main__":
