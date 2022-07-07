@@ -12,7 +12,7 @@ with open('README.md', 'r', encoding='utf-8')as f:
 
 setup(
     name='rdu',
-    version='0.0.5',
+    version='0.0.6',
     author='zbc',
     author_email='zbc@mail.ustc.edu.cn',
     url='https://github.com/zbc0315/rdu',
